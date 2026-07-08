@@ -19,6 +19,8 @@ import { config } from "./config";
         username: configService.get<string>("mysql.username"),
         password: configService.get<string>("mysql.password"),
         database: configService.get<string>("mysql.database"),
+        retryAttempts: 10,
+        retryDelay: 3000,
         autoLoadEntities: true,
         synchronize: configService.get<boolean>("mysql.synchronize"),
       }),
