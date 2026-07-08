@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { config } from "./config";
+import { JobsModule } from "./jobs/jobs.module";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { config } from "./config";
         synchronize: configService.get<boolean>("mysql.synchronize"),
       }),
     }),
+    JobsModule,
   ],
 })
 export class AppModule {}
