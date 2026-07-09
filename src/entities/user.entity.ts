@@ -21,6 +21,18 @@ export class User {
   })
   uuid!: string;
 
+  @Column({
+    name: "email",
+    nullable: false,
+  })
+  email!: string;
+
+  @Column({
+    name: "hashed_password",
+    nullable: false,
+  })
+  hashedPassword!: string;
+
   @CreateDateColumn({
     type: "datetime",
     nullable: false,
