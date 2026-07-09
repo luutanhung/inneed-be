@@ -3,6 +3,9 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { config } from "./config";
 import { JobsModule } from "./jobs/jobs.module";
+import { ZodSerializerInterceptor, ZodValidationPipe } from "nestjs-zod";
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { HttpExceptionFilter } from "./shared/filters/httpException.filter";
 
 @Module({
   imports: [
@@ -27,6 +30,20 @@ import { JobsModule } from "./jobs/jobs.module";
       }),
     }),
     JobsModule,
+  ],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ZodValidationPipe,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ZodSerializerInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
   ],
 })
 export class AppModule {}
