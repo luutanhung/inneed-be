@@ -6,6 +6,7 @@ import { JobsModule } from "./jobs/jobs.module";
 import { ZodSerializerInterceptor, ZodValidationPipe } from "nestjs-zod";
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
 import { HttpExceptionFilter } from "./shared/filters/httpException.filter";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { HttpExceptionFilter } from "./shared/filters/httpException.filter";
       }),
     }),
     JobsModule,
+    UsersModule,
   ],
   providers: [
     {
