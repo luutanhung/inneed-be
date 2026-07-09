@@ -11,12 +11,17 @@ export class JobsService {
     private jobsRepo: Repository<Job>,
   ) {}
 
-  createJob(job: CreateJobDto) {
-    return this.jobsRepo.create({
+  async createJob(job: CreateJobDto) {
+    const newJob = this.jobsRepo.create({
       title: job.title,
       status: job.status,
       createdAt: job.createdAt,
+      dueAt: job.dueAt,
     });
+
+    const savedJob = await this.jobsRepo.save(newJob);
+
+    return savedJob;
   }
 
   findAll(): Promise<Job[]> {

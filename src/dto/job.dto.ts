@@ -6,6 +6,7 @@ const CreateJobSchema = z.object({
   title: z.string(),
   status: z.enum(Object.values(JOB_STATUS)).default(JOB_STATUS.OPEN),
   createdAt: z.iso.datetime(),
+  dueAt: z.iso.datetime(),
 });
 
 export class CreateJobDto extends createZodDto(CreateJobSchema) {}

@@ -9,8 +9,8 @@ export class JobsController {
   constructor(private jobsService: JobsService) {}
 
   @Post("/post")
-  postJobDescription(@Body() job: CreateJobDto) {
-    const createdJob = this.jobsService.createJob(job);
+  async postJobDescription(@Body() job: CreateJobDto) {
+    const createdJob = await this.jobsService.createJob(job);
 
     return new AppResponse({
       code: RES_CODE.SUCCESS,
