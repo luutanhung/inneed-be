@@ -6,7 +6,6 @@ export const config = () => ({
     username: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
-    synchronize:
-      (process.env.MYSQL_SYNCHRONIZE || "false").toLowerCase() === "true",
+    synchronize: (process.env.MYSQL_SYNCHRONIZE || "false").toLowerCase() === "true",
   },
 });
