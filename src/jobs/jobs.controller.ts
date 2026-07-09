@@ -1,14 +1,25 @@
-import { Controller, Get } from "@nestjs/common";
-import { JobsService } from "./jobs.service";
-import { AppResponse } from "src/core/response/app.response";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { RES_CODE } from "src/constants/response.constants";
+import { AppResponse } from "src/core/response/app.response";
+import { CreateJobDto } from "src/dto/job.dto";
+import { JobsService } from "./jobs.service";
 
-@Controller("jobs")
+@Controller("/api/v1/jobs")
 export class JobsController {
   constructor(private jobsService: JobsService) {}
 
-  @Get()
-  findAll() {
+  @Post("/post")
+  postJobDescription(@Body() job: CreateJobDto) {
+    const createdJob = this.jobsService.createJob(job);
+
+    return new AppResponse({
+      code: RES_CODE.SUCCESS,
+      data: createdJob,
+    });
+  }
+
+  @Get("/")
+  findAllJobDescriptions() {
     const jobs = this.jobsService.findAll();
 
     return new AppResponse({
